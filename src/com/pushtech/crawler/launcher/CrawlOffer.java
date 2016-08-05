@@ -164,7 +164,7 @@ public class CrawlOffer {
 
    private String getDescription(final Document productPageDocument) throws Exception {
       final Element descriptionElement = findElement(productPageDocument, Selectors.PRODUCT_DESCRIPTION); // TODO
-      String description = fromElementText(descriptionElement);
+      String description = fromAttribute(descriptionElement, "content");
       description = validateField(description, "Description");
       return description;
    }
@@ -172,7 +172,7 @@ public class CrawlOffer {
    private String getKeywords(final Document productPageDocument) throws Exception {
       final Element descriptionElement = findElement(productPageDocument, Selectors.PRODUCT_KEYWORDS); // TODO
       String description = fromAttribute(descriptionElement, "content");
-      description = validateField(description, "Description");
+      description = validateField(description, "Keywords");
       return description;
    }
 
@@ -185,7 +185,7 @@ public class CrawlOffer {
 
    private String getCategory(final Document productPageDocument) throws Exception {
       String category = "";
-      final Elements categoryElements = productPageDocument.select(".breadcrumbs > ul > li > a");
+      final Elements categoryElements = productPageDocument.select(Selectors.PRODUCT_CATEGORY);
       for (Element elmt : categoryElements) {
          if (!category.equals("")) category += " > ";
          category += elmt.text();
@@ -212,7 +212,7 @@ public class CrawlOffer {
 
    private float getPrice(final Element element) {
       final Element priceElement = findElement(element, Selectors.PRODUCT_PRICE);
-      String priceRaw = priceElement.text();
+      String priceRaw = fromAttribute(priceElement, "content");
       priceRaw = validateField(priceRaw, "Price", 1);
       return parseLocalizedPrice(priceRaw.replace(".", ","));
    }
