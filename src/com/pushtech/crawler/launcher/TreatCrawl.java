@@ -118,7 +118,7 @@ public class TreatCrawl {
       path = path.replace("" + (char) 201, "%C3%89").replace(" ", "%20").replace("" + (char) 232, "%C3%A8");
       path = path.replace("" + ((char) 96), "%60").replace("" + ((char) 233), "%C3%A9").replace("" + ((char) 146), "%E2%80%99");
       if (!StringUtils.startsWith(path, "http:")) {
-         path = "https://www.wordans.fr/" + path;
+         path = "http://www.tati.fr/" + path;
 
       }
       // try {

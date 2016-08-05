@@ -67,7 +67,7 @@ public class Crawl {
       HttpResponse response = null;
       HashMap<String, String> headers = new HashMap<String, String>();
 
-      headers.put("Host", "www.decosdumonde.com");
+      headers.put("Host", "www.tati.fr");
       headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0");
 
       response = ConnectionHandler.getResponse(url, null, headers, methodeType);
