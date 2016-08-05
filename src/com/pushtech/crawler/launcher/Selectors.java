@@ -16,9 +16,9 @@ public class Selectors {
    public static final String PRODUCT_DELIVERY = ".a-shipping";
 
    // listing page
-   public static final String LISTING_PAGE_IDENTIFIER = "ul.list_rayons>li>a";
-   public static final String LISTING_PAGE_PRODUCTS = ".products-grid > li";
-   public static final String LISTING_PAGE_PRODUCT_LINK = "a";
+   public static final String LISTING_PAGE_IDENTIFIER = ".product_link";
+   public static final String LISTING_PAGE_PRODUCTS = ".product_link";
+   public static final String LISTING_PAGE_PRODUCT_LINK = "a.wrapper_product";
    public static final String NEXT_PAGE_LINK = ".next.i-next";
 
    // home page
