@@ -84,6 +84,11 @@ public class CrawlOffer {
       logger.debug("Price : " + price);
 
       String strKeyWord = "Empty";
+      try {
+         strKeyWord = getKeywords(productPageDocument);
+      } catch (Exception e1) {
+         logger.error(e1.getMessage() + " on " + page.getUrl());
+      }
 
       product.setKeyWord(strKeyWord);
       logger.debug("KeyWord : " + strKeyWord);
@@ -97,7 +102,7 @@ public class CrawlOffer {
       product.setShippingDelay(shippingDelay);
       logger.debug("Shipping delay : " + shippingDelay);
 
-      int quantity = 0;
+      int quantity = 10;
       try {
          quantity = getQuantity(productPageDocument);
       } catch (Exception e) {
@@ -108,7 +113,7 @@ public class CrawlOffer {
 
       String id = null;
       try {
-         id = getProductId(productPageDocument);
+         id = getProductIdFromLink(page.getUrl());
       } catch (Exception e) {
          logger.error(e.getMessage() + " on " + page.getUrl());
       }
@@ -137,8 +142,8 @@ public class CrawlOffer {
    public static String getProductIdFromLink(final String link) throws Exception {
       String productId = null;
       if (StringUtils.isNotEmpty(link)) {
-         productId = link;
-         productId = link.substring(link.lastIndexOf("-") + 1);
+         productId = productId.substring(productId.lastIndexOf("/") + 1);
+         productId = productId.replaceAll("[^\\d]", "").trim();
          if (!productId.matches("\\d+")) {
             logger.error("Invalid productId : |" + productId + "| set to null");
             productId = null;
@@ -194,11 +199,6 @@ public class CrawlOffer {
    }
 
    private String cleanCategory(String category) {
-      // if (category != null && category.contains(">")) {
-      // category = category.substring(category.lastIndexOf(">") + 1).trim();
-      // // category = category.substring(0,category.indexOf(" ")).trim();
-      // return category;
-      // } else
       return category != null ? category.trim() : null;
    }
 
@@ -212,16 +212,12 @@ public class CrawlOffer {
 
    private float getPrice(final Element element) {
       final Element priceElement = findElement(element, Selectors.PRODUCT_PRICE);
-      String priceRaw = fromAttribute(priceElement, "content");
+      String priceRaw = fromElementText(priceElement);
       priceRaw = validateField(priceRaw, "Price", 1);
       return parseLocalizedPrice(priceRaw.replace(".", ","));
    }
 
    private float getShippingCost(final Element element) {
-      // final Element shippingCostElement = findElement(element, Selectors.PRODUCT_SHIPPING_COST);// TODO
-      // String ShippingCostRaw = fromElementText(shippingCostElement);
-      // ShippingCostRaw = validateField(ShippingCostRaw, "Shipping price", 0);
-      // return parseLocalizedPrice(ShippingCostRaw);
       return -1f;
    }
 
@@ -255,6 +251,7 @@ public class CrawlOffer {
    private String getShippingDelayRaw(final Element element) {
       Element shippingDelayElement = findElement(element, Selectors.PRODUCT_DELIVERY);// TODO
       String shippingDelayRaw = fromElementText(shippingDelayElement);
+      shippingDelayRaw = StringUtils.substringAfterLast(shippingDelayRaw, "le").replace("/", "-").trim();
       shippingDelayRaw = validateField(shippingDelayRaw, "Raw delivery", 1);
       return shippingDelayRaw;
    }

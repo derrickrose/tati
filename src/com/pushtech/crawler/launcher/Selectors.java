@@ -8,12 +8,12 @@ public class Selectors {
    public static final String PRODUCT_LINK = "p.product-name>a";
    public static final String PRODUCT_DESCRIPTION = "meta[name=description]";
    public static final String PRODUCT_KEYWORDS = "meta[name=keywords]";
-   public static final String PRODUCT_IDENTIFIER = ".product-shop > p";
+   public static final String PRODUCT_IDENTIFIER = "#prodid";
    public static final String PRODUCT_CATEGORY = "div#ariane>a";// elements
    public static final String PRODUCT_IMAGE = "img#img_large";
-   public static final String PRODUCT_PRICE = "div.product_price>div>meta[itemprop=price]";
+   public static final String PRODUCT_PRICE = "p#prix_site";
    public static final String PRODUCT_QUANTITY = "p.availability.in-stock>span";
-   public static final String PRODUCT_DELIVERY = ".a-shipping";
+   public static final String PRODUCT_DELIVERY = "p#chez_vous_le";
 
    // listing page
    public static final String LISTING_PAGE_IDENTIFIER = ".product_link";
