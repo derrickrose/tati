@@ -104,16 +104,15 @@ public class Crawl {
          System.out.println("Variant size Name :" + strVariantSize);
          variantProduct.setBrand(strVariantSize);
          variantProduct.setName(p.getName());
-         variantProduct.setId(p.getId());
+         variantProduct.setId(p.getId()+"-"+strVariantSize);
          variantProduct.setDescription(p.getDescription());
          variantProduct.setKeyWord(p.getKeyWord());
          variantProduct.setPrice(p.getPrice());
          variantProduct.setCategory(p.getCategory());
          variantProduct.setShippingDelay(p.getShippingDelay());
          variantProduct.setQuantity(10);
-         variantProduct.setParentId(p.getParentId());
+         variantProduct.setParentId(p.getId());
          variantProduct.setImage(p.getImage());
-         variantProduct.setId(p.getId());
          variantProduct.setUpdated(p.getUpdated());
          products.add(variantProduct);
 

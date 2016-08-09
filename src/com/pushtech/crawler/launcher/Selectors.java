@@ -8,7 +8,7 @@ public class Selectors {
    public static final String PRODUCT_LINK = "p.product-name>a";
    public static final String PRODUCT_DESCRIPTION = "meta[name=description]";
    public static final String PRODUCT_KEYWORDS = "meta[name=keywords]";
-   public static final String PRODUCT_IDENTIFIER = "#prodid";
+   public static final String PRODUCT_IDENTIFIER = "input[name=produit_id]";
    public static final String PRODUCT_CATEGORY = "div#ariane>a";// elements
    public static final String PRODUCT_IMAGE = "img#img_large";
    public static final String PRODUCT_PRICE = "p#prix_site";

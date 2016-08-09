@@ -113,7 +113,7 @@ public class CrawlOffer {
 
       String id = null;
       try {
-         id = getProductIdFromLink(page.getUrl());
+         id = getProductId(productPageDocument);
       } catch (Exception e) {
          logger.error(e.getMessage() + " on " + page.getUrl());
       }
@@ -124,19 +124,13 @@ public class CrawlOffer {
    }
 
    private String getProductId(final Document productPageDocument) throws Exception {
-      final Elements productIdElements = productPageDocument.select(Selectors.PRODUCT_IDENTIFIER);
+      final Element productIdElement = productPageDocument.select(Selectors.PRODUCT_IDENTIFIER).first();
       String productIdRaw = null;
-      for (Element element : productIdElements) {
-         productIdRaw = element.text();
-         if (productIdRaw.contains("rticle")) {
-            break;
-         }
+      if(productIdElement!=null){
+    	  productIdRaw = fromAttribute(productIdElement, "value");
       }
-      // TODO
-      String productId = productIdRaw;
-      productId = validateField(productId, "Product Id");
-      productId = productId.replace("Réf.", "").replace(":", "").trim();
-      return productId;
+      productIdRaw = validateField(productIdRaw, "Product Id");
+      return productIdRaw;
    }
 
    public static String getProductIdFromLink(final String link) throws Exception {
@@ -408,7 +402,7 @@ public class CrawlOffer {
 
    private static String cleanPath(String path) {
       if (!StringUtils.startsWith(path, "http:")) {
-         return "http://www.alcodistributions.fr" + path;
+         return ("http://www.tati.fr/" + path).replace("fr//", "fr/");
       }
       return path;
    }

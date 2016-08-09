@@ -1,0 +1,68 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Client :  127.0.0.1
+-- Généré le :  Mar 09 Août 2016 à 06:23
+-- Version du serveur :  10.1.10-MariaDB
+-- Version de PHP :  7.0.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `crawl`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tati`
+--
+
+CREATE TABLE `tati` (
+  `productId` varchar(15) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `link` varchar(600) NOT NULL,
+  `image` varchar(600) NOT NULL,
+  `description` varchar(2500) NOT NULL,
+  `motclef` varchar(600) NOT NULL,
+  `price` float NOT NULL,
+  `shippingCost` float NOT NULL,
+  `shippingDealy` int(3) NOT NULL,
+  `brand` varchar(50) DEFAULT NULL,
+  `category` varchar(150) DEFAULT NULL,
+  `quantity` int(10) DEFAULT NULL,
+  `update_time` varchar(50) DEFAULT NULL,
+  `parent_Id` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `tati`
+--
+
+INSERT INTO `tati` (`productId`, `Name`, `link`, `image`, `description`, `motclef`, `price`, `shippingCost`, `shippingDealy`, `brand`, `category`, `quantity`, `update_time`, `parent_Id`) VALUES
+('109140-T1', 'T-shirt imprimé', '', 'http://www.tati.fr/phototheque/boutique/109250/prodfp/00W070265A.jpg', 'Tati, les plus bas prix ! T-shirt imprimé , Col rond , Manches courtes , Imprimé devant , Lien à nouer au dos   , En coton , Longueur : environ 51 cm en Taille 1, Conseil d''entretien : lavage 30°C ', 'Tati, T-shirt imprimé, A nouer au dos, Coup de Balai, Tous les produits', 5.99, -1, 0, 'T1', 'vetements-femme > coup-de-balai', 10, '09/08/2016 07:21:15', '109140'),
+('109140-T2', 'T-shirt imprimé', '', 'http://www.tati.fr/phototheque/boutique/109250/prodfp/00W070265A.jpg', 'Tati, les plus bas prix ! T-shirt imprimé , Col rond , Manches courtes , Imprimé devant , Lien à nouer au dos   , En coton , Longueur : environ 51 cm en Taille 1, Conseil d''entretien : lavage 30°C ', 'Tati, T-shirt imprimé, A nouer au dos, Coup de Balai, Tous les produits', 5.99, -1, 0, 'T2', 'vetements-femme > coup-de-balai', 10, '09/08/2016 07:21:15', '109140'),
+('109140-T3', 'T-shirt imprimé', '', 'http://www.tati.fr/phototheque/boutique/109250/prodfp/00W070265A.jpg', 'Tati, les plus bas prix ! T-shirt imprimé , Col rond , Manches courtes , Imprimé devant , Lien à nouer au dos   , En coton , Longueur : environ 51 cm en Taille 1, Conseil d''entretien : lavage 30°C ', 'Tati, T-shirt imprimé, A nouer au dos, Coup de Balai, Tous les produits', 5.99, -1, 0, 'T3', 'vetements-femme > coup-de-balai', 10, '09/08/2016 07:21:15', '109140'),
+('109140-T4', 'T-shirt imprimé', '', 'http://www.tati.fr/phototheque/boutique/109250/prodfp/00W070265A.jpg', 'Tati, les plus bas prix ! T-shirt imprimé , Col rond , Manches courtes , Imprimé devant , Lien à nouer au dos   , En coton , Longueur : environ 51 cm en Taille 1, Conseil d''entretien : lavage 30°C ', 'Tati, T-shirt imprimé, A nouer au dos, Coup de Balai, Tous les produits', 5.99, -1, 0, 'T4', 'vetements-femme > coup-de-balai', 10, '09/08/2016 07:21:15', '109140');
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `tati`
+--
+ALTER TABLE `tati`
+  ADD PRIMARY KEY (`productId`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

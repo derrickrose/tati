@@ -18,7 +18,7 @@ import com.pushtech.crawler.launcher.DataBaseUpdaterHelper.UpdateWay;
 
 public class ProductDAO extends AbstractDAOEntity {
 
-   private static final String TABLE_NAME = "decosdumonde";
+   private static final String TABLE_NAME = "tati";
    private static final String INSERT_REQUEST = initInsertRequest();
    private static final String READ_REQUEST = initReadRequest();
    private static final String SEARCH_REQUEST = initSearchRequest();
@@ -63,7 +63,7 @@ public class ProductDAO extends AbstractDAOEntity {
       int status = 0;
       try {
          connection = daoFactory.getConnection();
-         preparedStatement = initPreparedRequest(connection, INSERT_REQUEST, true, product.getId(), validate(product.getName()), validate(product.getLink()), validate(product.getImage()), validate(product.getDescription()), validate(product.getKeyWord()), product.getPrice(), product.getShippingCost(), product.getShippingDelay(), validate(product.getBrand()), validate(product.getCategory()), product.getQuantity(), getNowDate());
+         preparedStatement = initPreparedRequest(connection, INSERT_REQUEST, true, product.getId(), validate(product.getName()), validate(product.getLink()), validate(product.getImage()), validate(product.getDescription()), validate(product.getKeyWord()), product.getPrice(), product.getShippingCost(), product.getShippingDelay(), validate(product.getBrand()), validate(product.getCategory()), product.getQuantity(), getNowDate(),validate(product.getParentId()));
          status = preparedStatement.executeUpdate();
          if (status == 0) {
             logger.error("Save product failed : " + product.getId() + " - " + product.getLink());
@@ -114,7 +114,7 @@ public class ProductDAO extends AbstractDAOEntity {
       product.setShippingDelay(resultSet.getInt("shippingDealy"));
       product.setQuantity(resultSet.getInt("quantity"));
       product.setUpdated(resultSet.getString("update_time"));//
-
+      product.setParentId(resultSet.getString("parent_Id"));//
       return product;
    }
 
@@ -125,9 +125,9 @@ public class ProductDAO extends AbstractDAOEntity {
 
    private static String initInsertRequest() {
       String insertRequest = "INSERT INTO " + TABLE_NAME + " ";
-      insertRequest += "(productId, Name, link, image, description, motclef, price, shippingCost, shippingDealy, brand, category, quantity, update_time)";
+      insertRequest += "(productId, Name, link, image, description, motclef, price, shippingCost, shippingDealy, brand, category, quantity, update_time,parent_Id)";
 
-      insertRequest += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      insertRequest += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       return insertRequest;
    }
 
@@ -145,6 +145,7 @@ public class ProductDAO extends AbstractDAOEntity {
       updateRequest += " , " + "category = ?";
       updateRequest += " , " + "quantity = ?";
       updateRequest += " , " + "update_time = ?";
+      updateRequest += " , " + "parent_Id = ?";
       updateRequest += " WHERE productId = ? ";
       return updateRequest;
    }
