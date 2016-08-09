@@ -97,27 +97,44 @@ public class Crawl {
    private List<Product> getproducts(Document docProduct, Product p) {
       List<Product> products = new ArrayList<Product>();
       Elements lists = docProduct.select("div.radio_input_container.size>label");
-      System.out.println("VAriante size list:" + lists.size());
+      List<String> colorlist = productColors(docProduct);
+      System.out.println("Variante Color list:" + colorlist.size());
+      System.out.println("Variante size list:" + lists.size());
       for (Element productElement : lists) {
          Product variantProduct = new Product();
          String strVariantSize = productElement.text();
          System.out.println("Variant size Name :" + strVariantSize);
+         variantProduct.setSizeName(strVariantSize);// SIZE NAME
          variantProduct.setBrand(strVariantSize);
          variantProduct.setName(p.getName());
-         variantProduct.setId(p.getId()+"-"+strVariantSize);
-         variantProduct.setDescription(p.getDescription());
-         variantProduct.setKeyWord(p.getKeyWord());
+         variantProduct.setId(p.getId() + "-" + strVariantSize);
+         variantProduct.setDescription(cleanDescription(p.getDescription()));
+         variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
          variantProduct.setPrice(p.getPrice());
          variantProduct.setCategory(p.getCategory());
          variantProduct.setShippingDelay(p.getShippingDelay());
          variantProduct.setQuantity(10);
-         variantProduct.setParentId(p.getId());
+         variantProduct.setParentId(p.getId() + strVariantSize);
          variantProduct.setImage(p.getImage());
          variantProduct.setUpdated(p.getUpdated());
+         variantProduct.setLink(p.getLink());
          products.add(variantProduct);
 
       }
       return products;
+   }
+
+   private List<String> productColors(Document docProduct) {
+      List<String> products = new ArrayList<String>();
+      Elements lists = docProduct.select(Selectors.PRODUCT_COLOR_VARIANT);
+      for (Element p : lists) {
+         products.add(p.text());
+      }
+      return products;
+   }
+
+   private String cleanDescription(String strDescription) {
+      return strDescription.replace(";", "").replace(",", "");
    }
 
    private void homeCrawling(Page homePage) {

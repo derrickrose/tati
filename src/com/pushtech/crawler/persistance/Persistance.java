@@ -14,8 +14,6 @@ public class Persistance {
 
    public static void sauverEnBase(Product produit) {
 
-      // Information d'acc�s � la base de donn�es
-      // String url = "jdbc:mysql://localhost/crawl";
       String url = "jdbc:mysql://Devworkit-005/crawl";
       String login = "workdev";
       String passwd = "javdev2";

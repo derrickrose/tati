@@ -2,135 +2,153 @@ package com.pushtech.commons;
 
 public class Product {
 
-	private String id = null, parentId = null;
-	private String name = null, link = null, description = null, brand = null,
-			category = null, image = null;
-	private String keyWord = null;
-	private String updated = null;
-	private float price = -1f, shippingCost = -1f, previousPrice = -1;
-	private int shippingDelay = 0, quantity = 0;
+   private String id = null, parentId = null;
+   private String name = null, link = null, description = null, brand = null, category = null, image = null;
+   private String keyWord = null;
+   private String updated = null;
+   private float price = -1f, shippingCost = -1f, previousPrice = -1;
+   private String colorName = null;
+   private String SizeName = null;
 
-	public void setKeyWord(String keyWord) {
-		this.keyWord = keyWord;
-	}
+   public String getColorName() {
+      return colorName;
+   }
 
-	public String getUpdated() {
-		return updated;
-	}
+   public void setColorName(String colorName) {
+      this.colorName = colorName;
+   }
 
-	public void setUpdated(String date) {
-		this.updated = date;
-	}
+   public String getSizeName() {
+      return SizeName;
+   }
 
-	public String getKeyWord() {
-		return keyWord;
-	}
+   public void setSizeName(String sizeName) {
+      SizeName = sizeName;
+   }
 
-	public String getId() {
-		return id;
-	}
+   private int shippingDelay = 0, quantity = 0;
 
-	public String getParentId() {
-		return parentId;
-	}
+   public void setKeyWord(String keyWord) {
+      this.keyWord = keyWord;
+   }
 
-	public String getName() {
-		return name;
-	}
+   public String getUpdated() {
+      return updated;
+   }
 
-	public String getLink() {
-		return link;
-	}
+   public void setUpdated(String date) {
+      this.updated = date;
+   }
 
-	public String getDescription() {
-		return description;
-	}
+   public String getKeyWord() {
+      return keyWord;
+   }
 
-	public String getBrand() {
-		return brand;
-	}
+   public String getId() {
+      return id;
+   }
 
-	public String getCategory() {
-		return category;
-	}
+   public String getParentId() {
+      return parentId;
+   }
 
-	public String getImage() {
-		return image;
-	}
+   public String getName() {
+      return name;
+   }
 
-	public float getPrice() {
-		return price;
-	}
+   public String getLink() {
+      return link;
+   }
 
-	public float getShippingCost() {
-		return shippingCost;
-	}
+   public String getDescription() {
+      return description;
+   }
 
-	public int getShippingDelay() {
-		return shippingDelay;
-	}
+   public String getBrand() {
+      return brand;
+   }
 
-	public int getQuantity() {
-		return quantity;
-	}
+   public String getCategory() {
+      return category;
+   }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+   public String getImage() {
+      return image;
+   }
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
+   public float getPrice() {
+      return price;
+   }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+   public float getShippingCost() {
+      return shippingCost;
+   }
 
-	public void setLink(String link) {
-		this.link = link;
-	}
+   public int getShippingDelay() {
+      return shippingDelay;
+   }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+   public int getQuantity() {
+      return quantity;
+   }
 
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
+   public void setId(String id) {
+      this.id = id;
+   }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+   public void setParentId(String parentId) {
+      this.parentId = parentId;
+   }
 
-	public void setImage(String image) {
-		this.image = image;
-	}
+   public void setName(String name) {
+      this.name = name;
+   }
 
-	public void setPrice(float price) {
-		this.price = price;
-	}
+   public void setLink(String link) {
+      this.link = link;
+   }
 
-	public void setShippingCost(float shippingCost) {
-		this.shippingCost = shippingCost;
-	}
+   public void setDescription(String description) {
+      this.description = description;
+   }
 
-	public void setShippingDelay(int shippingDelay) {
-		this.shippingDelay = shippingDelay;
-	}
+   public void setBrand(String brand) {
+      this.brand = brand;
+   }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+   public void setCategory(String category) {
+      this.category = category;
+   }
 
-	public float getPreviousPrice() {
-		return previousPrice;
-	}
+   public void setImage(String image) {
+      this.image = image;
+   }
 
-	public void setPreviousPrice(float previousPrice) {
-		this.previousPrice = previousPrice;
-	}
+   public void setPrice(float price) {
+      this.price = price;
+   }
 
-	public String toString() {
-		return "Product : " + id + " - " + name;
-	}
+   public void setShippingCost(float shippingCost) {
+      this.shippingCost = shippingCost;
+   }
+
+   public void setShippingDelay(int shippingDelay) {
+      this.shippingDelay = shippingDelay;
+   }
+
+   public void setQuantity(int quantity) {
+      this.quantity = quantity;
+   }
+
+   public float getPreviousPrice() {
+      return previousPrice;
+   }
+
+   public void setPreviousPrice(float previousPrice) {
+      this.previousPrice = previousPrice;
+   }
+
+   public String toString() {
+      return "Product : " + id + " - " + name;
+   }
 }
