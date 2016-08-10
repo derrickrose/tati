@@ -109,16 +109,16 @@ public class Crawl {
                System.out.println("Variant size Name :" + strColorName);
                variantProduct.setSizeName(strVariantSize);// SIZE NAME
                variantProduct.setColorName(strColorName);
-               variantProduct.setBrand(strVariantSize);
+               // variantProduct.setBrand(strVariantSize);
                variantProduct.setName(p.getName());
-               variantProduct.setId(p.getId() + "-" + strVariantSize + "-" + strColorName);
+               variantProduct.setId(p.getId() + "-" + strColorName + "-" + strVariantSize);
                variantProduct.setDescription(cleanDescription(p.getDescription()));
                variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
                variantProduct.setPrice(p.getPrice());
                variantProduct.setCategory(p.getCategory());
                variantProduct.setShippingDelay(p.getShippingDelay());
                variantProduct.setQuantity(10);
-               variantProduct.setParentId(p.getId() + strColorName + strVariantSize);
+               variantProduct.setParentId(p.getId());
                variantProduct.setImage(p.getImage());
                variantProduct.setUpdated(p.getUpdated());
                variantProduct.setLink(p.getLink());
@@ -133,7 +133,7 @@ public class Crawl {
             String strVariantSize = productElement.text();
             System.out.println("Variant size Name :" + strVariantSize);
             variantProduct.setSizeName(strVariantSize);// SIZE NAME
-            variantProduct.setBrand(strVariantSize);
+            // variantProduct.setBrand(strVariantSize);
             variantProduct.setName(p.getName());
             variantProduct.setId(p.getId() + "-" + strVariantSize);
             variantProduct.setDescription(cleanDescription(p.getDescription()));
@@ -142,7 +142,7 @@ public class Crawl {
             variantProduct.setCategory(p.getCategory());
             variantProduct.setShippingDelay(p.getShippingDelay());
             variantProduct.setQuantity(10);
-            variantProduct.setParentId(p.getId() + strVariantSize);
+            variantProduct.setParentId(p.getId());
             variantProduct.setImage(p.getImage());
             variantProduct.setUpdated(p.getUpdated());
             variantProduct.setLink(p.getLink());

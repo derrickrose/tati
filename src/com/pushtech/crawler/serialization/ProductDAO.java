@@ -63,7 +63,7 @@ public class ProductDAO extends AbstractDAOEntity {
       int status = 0;
       try {
          connection = daoFactory.getConnection();
-         preparedStatement = initPreparedRequest(connection, INSERT_REQUEST, true, product.getId(), validate(product.getName()), validate(product.getLink()), validate(product.getImage()), validate(product.getDescription()), validate(product.getKeyWord()), product.getPrice(), product.getShippingCost(), product.getShippingDelay(), validate(product.getBrand()), validate(product.getCategory()), product.getQuantity(), getNowDate(),validate(product.getParentId()));
+         preparedStatement = initPreparedRequest(connection, INSERT_REQUEST, true, product.getId(), validate(product.getName()), validate(product.getLink()), validate(product.getImage()), validate(product.getDescription()), validate(product.getKeyWord()), product.getPrice(), product.getShippingCost(), product.getShippingDelay(), validate(product.getBrand()), validate(product.getCategory()), product.getQuantity(), getNowDate(), validate(product.getParentId()), validate(product.getColorName()), validate(product.getSizeName()));
          status = preparedStatement.executeUpdate();
          if (status == 0) {
             logger.error("Save product failed : " + product.getId() + " - " + product.getLink());
@@ -114,7 +114,9 @@ public class ProductDAO extends AbstractDAOEntity {
       product.setShippingDelay(resultSet.getInt("shippingDealy"));
       product.setQuantity(resultSet.getInt("quantity"));
       product.setUpdated(resultSet.getString("update_time"));//
-      product.setParentId(resultSet.getString("parent_Id"));//
+      product.setParentId(resultSet.getString("parent_id"));//
+      product.setColorName(resultSet.getString("color_name"));//
+      product.setSizeName(resultSet.getString("size_name"));//
       return product;
    }
 
@@ -125,9 +127,9 @@ public class ProductDAO extends AbstractDAOEntity {
 
    private static String initInsertRequest() {
       String insertRequest = "INSERT INTO " + TABLE_NAME + " ";
-      insertRequest += "(productId, Name, link, image, description, motclef, price, shippingCost, shippingDealy, brand, category, quantity, update_time,parent_Id)";
+      insertRequest += "(productId, Name, link, image, description, motclef, price, shippingCost, shippingDealy, brand, category, quantity, update_time,parent_id,color_name,size_name)";
 
-      insertRequest += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      insertRequest += "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       return insertRequest;
    }
 
@@ -145,7 +147,9 @@ public class ProductDAO extends AbstractDAOEntity {
       updateRequest += " , " + "category = ?";
       updateRequest += " , " + "quantity = ?";
       updateRequest += " , " + "update_time = ?";
-      updateRequest += " , " + "parent_Id = ?";
+      updateRequest += " , " + "parent_id = ?";
+      updateRequest += " , " + "color_name = ?";
+      updateRequest += " , " + "size_name = ?";
       updateRequest += " WHERE productId = ? ";
       return updateRequest;
    }
@@ -164,7 +168,7 @@ public class ProductDAO extends AbstractDAOEntity {
             DataBaseUpdaterHelper dbuh = DataBaseUpdaterHelper.getUpdaterMode(true, UpdateWay.SIMPLE_UPDATE);
             product = dbuh.updateProduct(siteProduct, databaseProduct);
             connection = daoFactory.getConnection();
-            updateStatement = initPreparedRequest(connection, UPDATE_REQUEST, true, product.getName(), product.getLink(), product.getImage(), product.getDescription(), product.getKeyWord(), product.getPrice(), product.getShippingCost(), product.getShippingDelay(), product.getBrand(), product.getCategory(), product.getQuantity(), getNowDate(), product.getId());
+            updateStatement = initPreparedRequest(connection, UPDATE_REQUEST, true, product.getName(), product.getLink(), product.getImage(), product.getDescription(), product.getKeyWord(), product.getPrice(), product.getShippingCost(), product.getShippingDelay(), product.getBrand(), product.getCategory(), product.getQuantity(), getNowDate(), product.getParentId(), product.getColorName(), product.getSizeName(), product.getId());
             status = updateStatement.executeUpdate();
             if (status != 0) logger.debug("Update passed");
             else logger.error("Update failed : " + product.getId() + " - " + product.getLink());
