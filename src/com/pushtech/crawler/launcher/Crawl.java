@@ -100,27 +100,82 @@ public class Crawl {
       List<String> colorlist = productColors(docProduct);
       System.out.println("Variante Color list:" + colorlist.size());
       System.out.println("Variante size list:" + lists.size());
-      for (Element productElement : lists) {
-         Product variantProduct = new Product();
-         String strVariantSize = productElement.text();
-         System.out.println("Variant size Name :" + strVariantSize);
-         variantProduct.setSizeName(strVariantSize);// SIZE NAME
-         variantProduct.setBrand(strVariantSize);
-         variantProduct.setName(p.getName());
-         variantProduct.setId(p.getId() + "-" + strVariantSize);
-         variantProduct.setDescription(cleanDescription(p.getDescription()));
-         variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
-         variantProduct.setPrice(p.getPrice());
-         variantProduct.setCategory(p.getCategory());
-         variantProduct.setShippingDelay(p.getShippingDelay());
-         variantProduct.setQuantity(10);
-         variantProduct.setParentId(p.getId() + strVariantSize);
-         variantProduct.setImage(p.getImage());
-         variantProduct.setUpdated(p.getUpdated());
-         variantProduct.setLink(p.getLink());
-         products.add(variantProduct);
+      if (colorlist.size() > 0 && lists.size() > 0) {
+         for (String strColorName : colorlist) {
+            for (Element productElement : lists) {
+               Product variantProduct = new Product();
+               String strVariantSize = productElement.text();
+               System.out.println("Variant size Name :" + strVariantSize);
+               System.out.println("Variant size Name :" + strColorName);
+               variantProduct.setSizeName(strVariantSize);// SIZE NAME
+               variantProduct.setColorName(strColorName);
+               variantProduct.setBrand(strVariantSize);
+               variantProduct.setName(p.getName());
+               variantProduct.setId(p.getId() + "-" + strVariantSize + "-" + strColorName);
+               variantProduct.setDescription(cleanDescription(p.getDescription()));
+               variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
+               variantProduct.setPrice(p.getPrice());
+               variantProduct.setCategory(p.getCategory());
+               variantProduct.setShippingDelay(p.getShippingDelay());
+               variantProduct.setQuantity(10);
+               variantProduct.setParentId(p.getId() + strColorName + strVariantSize);
+               variantProduct.setImage(p.getImage());
+               variantProduct.setUpdated(p.getUpdated());
+               variantProduct.setLink(p.getLink());
+               products.add(variantProduct);
 
+            }
+         }
+
+      } else if (lists.size() > 0) {
+         for (Element productElement : lists) {
+            Product variantProduct = new Product();
+            String strVariantSize = productElement.text();
+            System.out.println("Variant size Name :" + strVariantSize);
+            variantProduct.setSizeName(strVariantSize);// SIZE NAME
+            variantProduct.setBrand(strVariantSize);
+            variantProduct.setName(p.getName());
+            variantProduct.setId(p.getId() + "-" + strVariantSize);
+            variantProduct.setDescription(cleanDescription(p.getDescription()));
+            variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
+            variantProduct.setPrice(p.getPrice());
+            variantProduct.setCategory(p.getCategory());
+            variantProduct.setShippingDelay(p.getShippingDelay());
+            variantProduct.setQuantity(10);
+            variantProduct.setParentId(p.getId() + strVariantSize);
+            variantProduct.setImage(p.getImage());
+            variantProduct.setUpdated(p.getUpdated());
+            variantProduct.setLink(p.getLink());
+            products.add(variantProduct);
+
+         }
+      } else if (colorlist.size() > 0) {
+         for (String strColorName : colorlist) {
+            Product variantProduct = new Product();
+            System.out.println("Variant size Name :" + strColorName);
+            variantProduct.setColorName(strColorName);
+            variantProduct.setBrand(strColorName);
+            variantProduct.setName(p.getName());
+            variantProduct.setId(p.getId() + "-" + strColorName);
+            variantProduct.setDescription(cleanDescription(p.getDescription()));
+            variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
+            variantProduct.setPrice(p.getPrice());
+            variantProduct.setCategory(p.getCategory());
+            variantProduct.setShippingDelay(p.getShippingDelay());
+            variantProduct.setQuantity(10);
+            variantProduct.setParentId(p.getId() + strColorName);
+            variantProduct.setImage(p.getImage());
+            variantProduct.setUpdated(p.getUpdated());
+            variantProduct.setLink(p.getLink());
+            products.add(variantProduct);
+
+         }
+
+      } else {
+         // SANS VARIANTE
+         products.add(p);
       }
+
       return products;
    }
 
