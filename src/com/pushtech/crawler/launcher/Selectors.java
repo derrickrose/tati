@@ -6,7 +6,7 @@ public class Selectors {
    public static final String PRODUCT_PAGE_IDENTIFIER = "div#retour_product";
    public static final String PRODUCT_NAME = "h1#ajax_product_name>span";
    public static final String PRODUCT_LINK = "p.product-name>a";
-   public static final String PRODUCT_DESCRIPTION = "meta[name=description]";
+   public static final String PRODUCT_DESCRIPTION = "div.tab_nfo_cnt:has(ul.info_liste)";
    public static final String PRODUCT_KEYWORDS = "meta[name=keywords]";
    public static final String PRODUCT_IDENTIFIER = "input[name=produit_id]";
    public static final String PRODUCT_CATEGORY = "div#ariane>a";// elements

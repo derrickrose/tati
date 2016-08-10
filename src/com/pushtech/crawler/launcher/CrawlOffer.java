@@ -126,8 +126,8 @@ public class CrawlOffer {
    private String getProductId(final Document productPageDocument) throws Exception {
       final Element productIdElement = productPageDocument.select(Selectors.PRODUCT_IDENTIFIER).first();
       String productIdRaw = null;
-      if(productIdElement!=null){
-    	  productIdRaw = fromAttribute(productIdElement, "value");
+      if (productIdElement != null) {
+         productIdRaw = fromAttribute(productIdElement, "value");
       }
       productIdRaw = validateField(productIdRaw, "Product Id");
       return productIdRaw;
@@ -163,7 +163,7 @@ public class CrawlOffer {
 
    private String getDescription(final Document productPageDocument) throws Exception {
       final Element descriptionElement = findElement(productPageDocument, Selectors.PRODUCT_DESCRIPTION); // TODO
-      String description = fromAttribute(descriptionElement, "content");
+      String description = fromElementText(descriptionElement);
       description = validateField(description, "Description");
       return description;
    }
@@ -333,7 +333,7 @@ public class CrawlOffer {
    }
 
    private boolean isExpressedAsDate(final String rawDelivery) {
-      return StringUtils.contains(rawDelivery, "%Delivery date identifier%"); // TODO
+      return rawDelivery.matches("\\d{1,2}-\\d{1,2}-\\d{1,4}"); // TODO
    }
 
    private boolean isExpressedAsPeriod(final String rawDelivery) {
