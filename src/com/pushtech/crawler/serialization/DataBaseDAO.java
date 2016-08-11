@@ -14,7 +14,7 @@ import com.pushtech.crawler.ihm.FormHandler;
 
 public class DataBaseDAO extends DAOFactory {
 
-   private static final String MYSQL_PROPERTIES_PATH = "com/pushtech/crawler/serialization/database.mysql3.properties";
+   private static final String MYSQL_PROPERTIES_PATH = "com/pushtech/crawler/serialization/database.mysql.properties";
    private static final String ORACLE_PROPERTIES_PATH = "";// lol
    private static final String DRIVER_PROPERTY_FIELD = "driver";
    private static final String URL_PROPERTY_FIELD = "url";
