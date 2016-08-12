@@ -118,7 +118,7 @@ public class Crawl {
                variantProduct.setCategory(p.getCategory());
                variantProduct.setShippingDelay(p.getShippingDelay());
                variantProduct.setQuantity(10);
-               variantProduct.setParentId(p.getId() + strColorName + strVariantSize);
+               variantProduct.setParentId(p.getId());
                variantProduct.setImage(p.getImage());
                variantProduct.setUpdated(p.getUpdated());
                variantProduct.setLink(p.getLink());
@@ -142,7 +142,7 @@ public class Crawl {
             variantProduct.setCategory(p.getCategory());
             variantProduct.setShippingDelay(p.getShippingDelay());
             variantProduct.setQuantity(10);
-            variantProduct.setParentId(p.getId() + strVariantSize);
+            variantProduct.setParentId(p.getId());
             variantProduct.setImage(p.getImage());
             variantProduct.setUpdated(p.getUpdated());
             variantProduct.setLink(p.getLink());
@@ -163,7 +163,7 @@ public class Crawl {
             variantProduct.setCategory(p.getCategory());
             variantProduct.setShippingDelay(p.getShippingDelay());
             variantProduct.setQuantity(10);
-            variantProduct.setParentId(p.getId() + strColorName);
+            variantProduct.setParentId(p.getId());
             variantProduct.setImage(p.getImage());
             variantProduct.setUpdated(p.getUpdated());
             variantProduct.setLink(p.getLink());
