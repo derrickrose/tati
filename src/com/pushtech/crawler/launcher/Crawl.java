@@ -86,31 +86,42 @@ public class Crawl {
       System.out.println("Link : " + productPath);
       System.out.println("Id : " + product.getId());
       product.setLink(productPath);
-      for (Product produit : getproducts(productPage, product)) {
+      boolean isvariant = false;
+      List<Product> produits = getproducts(productPage, product);
+      for (Product produit : produits) {
          DAOFactory daoFactory = new DataBaseDAO().getFactoryInstance();
          AbstractDAOEntity daoEntity = new ProductDAO(daoFactory);
          daoEntity.updateEntity(produit);
+         isvariant = true;
+      }
+      if (produits.size() > 1 && isvariant) {
+         Product prod = produits.get(0);
+         prod.setId(prod.getParentId());
+         DAOFactory daoFactory = new DataBaseDAO().getFactoryInstance();
+         AbstractDAOEntity daoEntity = new ProductDAO(daoFactory);
+         daoEntity.updateEntity(prod);
       }
 
    }
 
    private List<Product> getproducts(Document docProduct, Product p) {
       List<Product> products = new ArrayList<Product>();
-      Elements lists = docProduct.select("div.radio_input_container.size>label");
-      List<String> colorlist = productColors(docProduct);
+      Elements lists = docProduct.select("legend:has(span:contains(Taille))+div.radio_input_container.size>label");
+      HashMap<String, String> colorlist = productColors(docProduct);
       System.out.println("Variante Color list:" + colorlist.size());
       System.out.println("Variante size list:" + lists.size());
       if (colorlist.size() > 0 && lists.size() > 0) {
-         for (String strColorName : colorlist) {
+         for (String strColorName : colorlist.keySet()) {
             for (Element productElement : lists) {
                Product variantProduct = new Product();
                String strVariantSize = productElement.text();
                System.out.println("Variant size Name :" + strVariantSize);
-               System.out.println("Variant size Name :" + strColorName);
+               System.out.println("Variant Color Name :" + strColorName);
                variantProduct.setSizeName(strVariantSize);// SIZE NAME
                variantProduct.setColorName(strColorName);
                variantProduct.setBrand(strVariantSize);
                variantProduct.setName(p.getName());
+               variantProduct.setParentId(p.getId());
                variantProduct.setId(p.getId() + "-" + strVariantSize + "-" + strColorName);
                variantProduct.setDescription(cleanDescription(p.getDescription()));
                variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
@@ -118,8 +129,7 @@ public class Crawl {
                variantProduct.setCategory(p.getCategory());
                variantProduct.setShippingDelay(p.getShippingDelay());
                variantProduct.setQuantity(10);
-               variantProduct.setParentId(p.getId());
-               variantProduct.setImage(p.getImage());
+               variantProduct.setImage(colorlist.get(strColorName));
                variantProduct.setUpdated(p.getUpdated());
                variantProduct.setLink(p.getLink());
                products.add(variantProduct);
@@ -135,6 +145,7 @@ public class Crawl {
             variantProduct.setSizeName(strVariantSize);// SIZE NAME
             variantProduct.setBrand(strVariantSize);
             variantProduct.setName(p.getName());
+            variantProduct.setParentId(p.getId());
             variantProduct.setId(p.getId() + "-" + strVariantSize);
             variantProduct.setDescription(cleanDescription(p.getDescription()));
             variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
@@ -142,7 +153,6 @@ public class Crawl {
             variantProduct.setCategory(p.getCategory());
             variantProduct.setShippingDelay(p.getShippingDelay());
             variantProduct.setQuantity(10);
-            variantProduct.setParentId(p.getId());
             variantProduct.setImage(p.getImage());
             variantProduct.setUpdated(p.getUpdated());
             variantProduct.setLink(p.getLink());
@@ -150,12 +160,13 @@ public class Crawl {
 
          }
       } else if (colorlist.size() > 0) {
-         for (String strColorName : colorlist) {
+         for (String strColorName : colorlist.keySet()) {
             Product variantProduct = new Product();
             System.out.println("Variant size Name :" + strColorName);
             variantProduct.setColorName(strColorName);
             variantProduct.setBrand(strColorName);
             variantProduct.setName(p.getName());
+            variantProduct.setParentId(p.getId());
             variantProduct.setId(p.getId() + "-" + strColorName);
             variantProduct.setDescription(cleanDescription(p.getDescription()));
             variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
@@ -163,8 +174,7 @@ public class Crawl {
             variantProduct.setCategory(p.getCategory());
             variantProduct.setShippingDelay(p.getShippingDelay());
             variantProduct.setQuantity(10);
-            variantProduct.setParentId(p.getId());
-            variantProduct.setImage(p.getImage());
+            variantProduct.setImage(colorlist.get(strColorName));
             variantProduct.setUpdated(p.getUpdated());
             variantProduct.setLink(p.getLink());
             products.add(variantProduct);
@@ -179,11 +189,15 @@ public class Crawl {
       return products;
    }
 
-   private List<String> productColors(Document docProduct) {
-      List<String> products = new ArrayList<String>();
+   private HashMap<String, String> productColors(Document docProduct) {
+      HashMap<String, String> products = new HashMap<String, String>();
       Elements lists = docProduct.select(Selectors.PRODUCT_COLOR_VARIANT);
       for (Element p : lists) {
-         products.add(p.text());
+         String Image = p.select("input").attr("data-visu");
+         Image = "http://www.tati.fr/" + Image;
+         Image = Image.replace(".fr//", ".fr/");
+         products.put(p.select("label").text(), Image);
+
       }
       return products;
    }
