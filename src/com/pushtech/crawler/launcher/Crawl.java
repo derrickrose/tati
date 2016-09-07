@@ -97,6 +97,7 @@ public class Crawl {
       if (produits.size() > 1 && isvariant) {
          Product prod = produits.get(0);
          prod.setId(prod.getParentId());
+         prod.setParentId("");
          DAOFactory daoFactory = new DataBaseDAO().getFactoryInstance();
          AbstractDAOEntity daoEntity = new ProductDAO(daoFactory);
          daoEntity.updateEntity(prod);
@@ -106,8 +107,8 @@ public class Crawl {
 
    private List<Product> getproducts(Document docProduct, Product p) {
       List<Product> products = new ArrayList<Product>();
-      Elements lists = docProduct.select("legend:has(span:contains(Taille))+div.radio_input_container.size>label");
-      HashMap<String, String> colorlist = productColors(docProduct);
+      Elements lists = docProduct.select("label[id*=prod_inputtaille]");
+      HashMap<String, String> colorlist = productColors(docProduct, p.getId());
       System.out.println("Variante Color list:" + colorlist.size());
       System.out.println("Variante size list:" + lists.size());
       if (colorlist.size() > 0 && lists.size() > 0) {
@@ -117,6 +118,7 @@ public class Crawl {
                String strVariantSize = productElement.text();
                System.out.println("Variant size Name :" + strVariantSize);
                System.out.println("Variant Color Name :" + strColorName);
+               System.out.println("Variant image url :" + colorlist.get(strColorName));
                variantProduct.setSizeName(strVariantSize);// SIZE NAME
                variantProduct.setColorName(strColorName);
                variantProduct.setBrand(strVariantSize);
@@ -189,14 +191,13 @@ public class Crawl {
       return products;
    }
 
-   private HashMap<String, String> productColors(Document docProduct) {
+   private HashMap<String, String> productColors(Document docProduct, String productId) {
       HashMap<String, String> products = new HashMap<String, String>();
-      Elements lists = docProduct.select(Selectors.PRODUCT_COLOR_VARIANT);
+      Elements lists = docProduct.select("input[data-prodid=" + productId + "]");
       for (Element p : lists) {
-         String Image = p.select("input").attr("data-visu");
-         Image = "http://www.tati.fr/" + Image;
-         Image = Image.replace(".fr//", ".fr/");
-         products.put(p.select("label").text(), Image);
+         String Image = p.attr("data-visu");
+         Image = "http://www.tati.fr" + Image;
+         products.put(p.attr("data-label"), Image);
 
       }
       return products;

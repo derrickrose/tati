@@ -103,11 +103,11 @@ public class CrawlOffer {
       logger.debug("Shipping delay : " + shippingDelay);
 
       int quantity = 10;
-      try {
-         quantity = getQuantity(productPageDocument);
-      } catch (Exception e) {
-         logger.error(e.getMessage() + " on " + page.getUrl());
-      }
+      // try {
+      // quantity = getQuantity(productPageDocument);
+      // } catch (Exception e) {
+      // logger.error(e.getMessage() + " on " + page.getUrl());
+      // }
       product.setQuantity(quantity);
       logger.debug("Quantity : " + quantity);
 
