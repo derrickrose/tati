@@ -98,6 +98,8 @@ public class Crawl {
          Product prod = produits.get(0);
          prod.setId(prod.getParentId());
          prod.setParentId("");
+         prod.setSizeName("");
+         prod.setColorName("");
          DAOFactory daoFactory = new DataBaseDAO().getFactoryInstance();
          AbstractDAOEntity daoEntity = new ProductDAO(daoFactory);
          daoEntity.updateEntity(prod);
