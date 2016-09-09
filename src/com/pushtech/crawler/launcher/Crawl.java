@@ -127,6 +127,7 @@ public class Crawl {
                variantProduct.setDescription(cleanDescription(p.getDescription()));
                variantProduct.setKeyWord(cleanDescription(p.getKeyWord()));
                variantProduct.setPrice(p.getPrice());
+               variantProduct.setBrand(p.getBrand());
                variantProduct.setCategory(p.getCategory());
                variantProduct.setShippingDelay(p.getShippingDelay());
                variantProduct.setQuantity(10);
@@ -144,7 +145,6 @@ public class Crawl {
             String strVariantSize = productElement.text();
             System.out.println("Variant size Name :" + strVariantSize);
             variantProduct.setSizeName(strVariantSize);// SIZE NAME
-            variantProduct.setBrand(strVariantSize);
             variantProduct.setName(p.getName());
             variantProduct.setParentId(p.getId());
             variantProduct.setId(p.getId() + "-" + strVariantSize);
@@ -157,6 +157,7 @@ public class Crawl {
             variantProduct.setImage(p.getImage());
             variantProduct.setUpdated(p.getUpdated());
             variantProduct.setLink(p.getLink());
+            variantProduct.setBrand(p.getBrand());
             products.add(variantProduct);
 
          }
@@ -165,7 +166,7 @@ public class Crawl {
             Product variantProduct = new Product();
             System.out.println("Variant size Name :" + strColorName);
             variantProduct.setColorName(strColorName);
-            variantProduct.setBrand(strColorName);
+            variantProduct.setBrand(p.getBrand());
             variantProduct.setName(p.getName());
             variantProduct.setParentId(p.getId());
             variantProduct.setId(p.getId() + "-" + strColorName);
