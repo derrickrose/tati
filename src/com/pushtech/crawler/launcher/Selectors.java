@@ -15,6 +15,7 @@ public class Selectors {
    public static final String PRODUCT_QUANTITY = "p.availability.in-stock>span";
    public static final String PRODUCT_DELIVERY = "p#chez_vous_le";
    public static final String PRODUCT_COLOR_VARIANT = "input[data-prodid=160199]";
+   public static final String PRODUCT_IMG_ALL = "div#prod_detail_panner>img";
 
    // listing page
    public static final String LISTING_PAGE_IDENTIFIER = ".product_link";

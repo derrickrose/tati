@@ -121,7 +121,6 @@ public class Crawl {
                System.out.println("Variant image url :" + colorlist.get(strColorName));
                variantProduct.setSizeName(strVariantSize);// SIZE NAME
                variantProduct.setColorName(strColorName);
-               variantProduct.setBrand(strVariantSize);
                variantProduct.setName(p.getName());
                variantProduct.setParentId(p.getId());
                variantProduct.setId(p.getId() + "-" + strVariantSize + "-" + strColorName);

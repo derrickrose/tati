@@ -52,9 +52,14 @@ public class CrawlOffer {
       product.setDescription(description);
       logger.debug("Description : " + description);
 
-      String brand = "";
-      product.setBrand(brand);
-      logger.debug("Brand : " + brand);
+      String brand;
+      try {
+         brand = getBrand(productPageDocument);
+         product.setBrand(brand);
+         logger.debug("Brand : " + brand);
+      } catch (Exception e2) {
+         logger.error(e2.getMessage() + " on " + page.getUrl());
+      }
 
       String category = null;
       try {
@@ -176,10 +181,19 @@ public class CrawlOffer {
    }
 
    private String getBrand(final Document productPageDocument) throws Exception {
-      // final Element brandElement = findElement(productPageDocument, Selectors.PRODUCT_BRAND); // TODO
-      // String brand = fromElementText(brandElement);
-      // brand = validateField(brand, "Brand");
-      return "aaaaaaaaaaaa";
+      String strBrand = "";
+      final Elements brandElement = productPageDocument.select(Selectors.PRODUCT_IMG_ALL);
+      for (int i = brandElement.size() - 2; i < brandElement.size(); i++) {
+         String Image = brandElement.get(i).attr("src");
+         Image = "http://www.tati.fr" + Image;
+         if (i == brandElement.size() - 2) {
+            strBrand += Image;
+         } else {
+            strBrand = strBrand + "-" + Image;
+         }
+
+      }
+      return strBrand;
    }
 
    private String getCategory(final Document productPageDocument) throws Exception {
